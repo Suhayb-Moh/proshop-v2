@@ -1,6 +1,11 @@
 import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
+import connectDB from "./config/db.js";
 import products from "./data/products.js";
-const port = 8000;
+const port = process.env.PORT || 5000;
+
+connectDB(); // connect to database
 
 const app = express();
 
@@ -18,5 +23,5 @@ app.get("/api/products/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`listening at port ${port}`);
 });
