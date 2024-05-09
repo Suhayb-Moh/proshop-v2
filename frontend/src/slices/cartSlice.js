@@ -34,12 +34,14 @@ const cartSlice = createSlice({
       // Calculate tax price (15% tax)
       state.taxPrice = addDecimals(Number(0.15 * state.itemsPrice).toFixed(2));
 
-      // Calculate total price
-      state.totalPrice = addDecimals(
+      // Calculate the total price | Total price is the sum of the items price, shipping price and tax price
+      state.totalPrice = (
         Number(state.itemsPrice) +
-          Number(state.shippingPrice) +
-          Number(state.taxPrice).toFixed(2)
-      );
+        Number(state.shippingPrice) +
+        Number(state.taxPrice)
+      ).toFixed(2);
+
+      // Save the cart to localStorage
       localStorage.setItem("cart", JSON.stringify(state));
     },
   },
